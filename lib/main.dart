@@ -1,5 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:group_matching_app/registration.dart';
+import 'package:group_matching_app/root_page.dart';
+import 'package:group_matching_app/user_account_list_page.dart';
 import 'login.dart';
 
 void main() async {
@@ -13,8 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Matching app',
-      home: Login(),
-    );
+        title: 'Matching app',
+        home: RootPage(),
+        routes: <String, WidgetBuilder>{
+          '/user_account_list': (BuildContext context) => UserAccountListPage(),
+          '/register': (BuildContext context) => Registration(),
+          '/login': (BuildContext context) => Login(),
+        });
   }
 }

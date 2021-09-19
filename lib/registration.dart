@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:group_matching_app/user_account_list_page.dart';
@@ -70,6 +71,11 @@ class _RegistrationState extends State<Registration> {
                         password: newPassword,
                       );
                       user = result.user;
+                      await FirebaseFirestore.instance.collection('user_accounts').add(
+                          {
+                            "uid": user!.uid,
+                            "email": user!.email
+                          });
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -82,6 +88,25 @@ class _RegistrationState extends State<Registration> {
                   },
                 )
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                  width: 350.0,
+                  child: ElevatedButton(
+                      child: Text(
+                        'ログインする',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.blue[50],
+                          onPrimary: Colors.blue
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/login');
+                      }
+                  )
+              ),
+            )
           ],
         ),
       ),

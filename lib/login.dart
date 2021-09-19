@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:group_matching_app/registration.dart';
 import 'package:group_matching_app/user_account_list_page.dart';
 import 'authentication_error.dart';
 
@@ -78,7 +77,6 @@ class _LoginState extends State<Login> {
                 try {
                   UserCredential result = await auth.signInWithEmailAndPassword(email: loginEmail, password: loginPassword);
                   user = result.user;
-                  debugPrint(result.user.toString());
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -112,10 +110,8 @@ class _LoginState extends State<Login> {
                       onPrimary: Colors.blue
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      fullscreenDialog: true,
-                      builder: (BuildContext context) => Registration(),
-                    ));},
+                    Navigator.pushNamed(context, '/register');
+                  }
                 )
             ),
           )
