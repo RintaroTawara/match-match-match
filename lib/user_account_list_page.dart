@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserAccountListPage extends StatelessWidget {
   final Stream<QuerySnapshot> _userAccountsStream = FirebaseFirestore.instance.collection('user_accounts').snapshots();
@@ -8,6 +9,17 @@ class UserAccountListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Matching app"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () async {
+              // ログアウト処理
+              // 内部で保持しているログイン情報等が初期化される
+              await FirebaseAuth.instance.signOut();
+              Navigator.pushReplacementNamed(context, "/login");
+            },
+          ),
+        ],
       ),
       body: Center(
         child: StreamBuilder<QuerySnapshot>(
