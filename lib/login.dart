@@ -64,31 +64,34 @@ class _LoginState extends State<Login> {
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 5.0),
-              child: ElevatedButton(
-                child: Text(
-                  'ログイン',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
-                  onPrimary: Colors.white
-                ),
-              onPressed: () async {
-                try {
-                  UserCredential result = await auth.signInWithEmailAndPassword(email: loginEmail, password: loginPassword);
-                  user = result.user;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => UserAccountListPage()
-                    )
-                  );
-                } on FirebaseAuthException catch (e) {
-                  setState(() {
-                    infoText = authError.loginErrorMsg(e.code);
-                  });
-                }
-              },
+              child: SizedBox(
+                width: 350.0,
+                child: ElevatedButton(
+                  child: Text(
+                    'ログイン',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.blue,
+                      onPrimary: Colors.white
+                  ),
+                  onPressed: () async {
+                    try {
+                      UserCredential result = await auth.signInWithEmailAndPassword(email: loginEmail, password: loginPassword);
+                      user = result.user;
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserAccountListPage()
+                          )
+                      );
+                    } on FirebaseAuthException catch (e) {
+                      setState(() {
+                        infoText = authError.loginErrorMsg(e.code);
+                      });
+                    }},
+                )
+
             ))
       ]
         )

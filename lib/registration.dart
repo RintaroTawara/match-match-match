@@ -62,7 +62,9 @@ class _RegistrationState extends State<Registration> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.blue[50], onPrimary: Colors.blue),
+                      primary: Colors.blue,
+                      onPrimary: Colors.white
+                  ),
                   onPressed: () async {
                     try {
                       UserCredential result =
@@ -88,27 +90,32 @@ class _RegistrationState extends State<Registration> {
                   },
                 )
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                  width: 350.0,
-                  child: ElevatedButton(
-                      child: Text(
-                        'ログインする',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.blue[50],
-                          onPrimary: Colors.blue
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/login');
-                      }
-                  )
-              ),
-            )
           ],
         ),
+      ),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SizedBox(
+              width: 350.0,
+              child: ElevatedButton(
+                child: Text(
+                  'ログインする',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.blue[50],
+                    onPrimary: Colors.blue
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+              ),
+            )
+          )
+        ],
       ),
     );
   }
