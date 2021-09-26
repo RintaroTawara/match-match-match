@@ -7,7 +7,7 @@ class AuthenticationError {
     if(errorCode == 'invalid-email'){
       errorMsg = '有効なメールアドレスを入力してください。';
 
-    }else if (errorCode == 'use-not_found'){
+    }else if (errorCode == 'user-not-found'){
       // 入力されたメールアドレスが登録されていない場合
       errorMsg = 'メールアドレスかパスワードが間違っています。';
 
