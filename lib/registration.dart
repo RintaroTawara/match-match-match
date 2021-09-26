@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:group_matching_app/user_account_list_page.dart';
 import 'authentication_error.dart';
 
 class Registration extends StatefulWidget {
@@ -14,6 +13,8 @@ class _RegistrationState extends State<Registration> {
   String newEmail ="";
   String newPassword = "";
   String infoText = "";
+  int? genderId;
+  List<String> listOfGenders = ["女性", "男性"];
   final FirebaseAuth auth = FirebaseAuth.instance;
   final authError = AuthenticationError();
   User? user;
@@ -46,6 +47,24 @@ class _RegistrationState extends State<Registration> {
               ),
             ),
             Padding(
+              padding: EdgeInsets.fromLTRB(25.0, 0, 25.0, 0),
+              child: DropdownButtonFormField(
+                items: listOfGenders.map((String value) {
+                  return DropdownMenuItem(
+                    value: value,
+                    child: Text(value)
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  if (value == "女性") {
+                    genderId = 1;
+                  } else if (value == "男性") {
+                    genderId = 2;
+                  }
+                },
+              ),
+            ),
+            Padding(
               padding: EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
               child: Text(
                 infoText,
@@ -73,15 +92,13 @@ class _RegistrationState extends State<Registration> {
                         password: newPassword,
                       );
                       user = result.user;
-                      await FirebaseFirestore.instance.collection('user_accounts').add(
+                      await FirebaseFirestore.instance.collection('userAccounts').add(
                           {
                             "uid": user!.uid,
-                            "email": user!.email
+                            "email": user!.email,
+                            "genderId": genderId
                           });
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => UserAccountListPage()));
+                      Navigator.pushNamedAndRemoveUntil(context, "/user_account_list", (Route<dynamic> route) => false);
                     } on FirebaseAuthException catch (e) {
                       setState(() {
                         infoText = authError.registerErrorMsg(e.code);

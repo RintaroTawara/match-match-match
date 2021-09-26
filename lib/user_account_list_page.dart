@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserAccountListPage extends StatelessWidget {
-  final Stream<QuerySnapshot> _userAccountsStream = FirebaseFirestore.instance.collection('user_accounts').snapshots();
+  final Stream<QuerySnapshot> _userAccountsStream = FirebaseFirestore.instance.collection('userAccounts').snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

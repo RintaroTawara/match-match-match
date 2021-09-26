@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:group_matching_app/user_account_list_page.dart';
 import 'authentication_error.dart';
 
 class Login extends StatefulWidget {
