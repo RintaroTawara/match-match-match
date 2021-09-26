@@ -40,6 +40,8 @@ class AuthenticationError {
       errorMsg = 'メールアドレスとパスワードを入力してください。';
     } else if (errorCode == 'weak-password') {
       errorMsg = 'パスワードは6文字以上です';
+    } else if (errorCode == 'email-already-in-use') {
+      errorMsg = 'メールアドレスは既に使用されています';
     } else{
       errorMsg = errorCode;
     }
