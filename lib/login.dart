@@ -79,12 +79,7 @@ class _LoginState extends State<Login> {
                     try {
                       UserCredential result = await auth.signInWithEmailAndPassword(email: loginEmail, password: loginPassword);
                       user = result.user;
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => UserAccountListPage()
-                          )
-                      );
+                      Navigator.pushNamedAndRemoveUntil(context, "/user_account_list", (Route<dynamic> route) => false);
                     } on FirebaseAuthException catch (e) {
                       setState(() {
                         infoText = authError.loginErrorMsg(e.code);
